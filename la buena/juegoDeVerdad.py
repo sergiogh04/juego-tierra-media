@@ -39,13 +39,13 @@ def menu_juego():
                 registrar_personaje(personajes)
                 print("\n")
             case 2:
-                crear_equipamiento()
+                crear_equipamiento(equipos)
                 print("\n")
             case 3:
-                equipar_objeto()
+                equipar_objeto(personajes,equipos)
                 print("\n")
             case 4:
-                relaciones_personajes()
+                relaciones_personajes(personajes)
                 print("\n")
             case 5:
                 mover_personaje()
