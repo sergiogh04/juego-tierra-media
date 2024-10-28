@@ -61,6 +61,5 @@ def equipar_objeto():
     else:
         print(f"El personaje '{nombre_personaje}' no existe")
 
-# Ejemplo de uso
 crear_equipamiento()
 equipar_objeto()
