@@ -29,6 +29,7 @@ def mostrar_personajes():
 
 def menu_juego():
     personajes = {}
+    equipos = {}
     while True:
         mostrar_menu()
         opcion = int(input("Selecciona una opción: "))
