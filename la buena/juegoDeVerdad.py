@@ -1,32 +1,4 @@
 
-
-def  añadir_equipamiento():
-    return print("")
-
-def  equipar_arma():
-    return print("")
-
-
-def  relaciones_personajes():
-    return print("")
-
-def mover_personaje():
-    return print("")
-
-def simular_batalla():
-    return print("")
-
-def personajes_faccion():
-    return print("")
-
-def buscar_personajes():
-    return print("")
-
-def mostrar_personajes():
-    return print("")
-
-
-
 def menu_juego():
     personajes = {}
     equipos = {}
@@ -54,13 +26,13 @@ def menu_juego():
                 simular_batalla()
                 print("\n")
             case 7:
-                personajes_faccion()
+                listar_personajes_faccion(personajes)
                 print("\n")
             case 8:
                 buscar_personajes()
                 print("\n")
             case 9:
-                mostrar_personajes()
+                mostrar_personajes(personajes)
                 print("\n")
             case 10:
                 print("Has salido del programa")
@@ -237,6 +209,37 @@ def ubicacion_personaje(personajes):
     nueva_ubicacion = input("Introduce la nueva ubicación: ").strip()
     personajes[nombre]["ubicacion"] = nueva_ubicacion
     print(f"{nombre} ha sido movido a {nueva_ubicacion}.")
+
+
+def listar_personajes_faccion(personajes):
+    faccion = input("Introduzca el nombre de una facción: ")
+    personajes_faccion = []
+
+    for nombre, informacion in personajes.items():
+        if informacion.get("faccion") == faccion:
+            personajes_faccion.append(nombre)
+
+
+    if personajes_faccion:
+        print(f"Personajes en la facción '{faccion}':")
+        print(personajes_faccion)
+    else:
+        print(f"No se encontraron personajes en la facción '{faccion}'.")
+
+
+
+
+
+
+def mostrar_personajes(personajes):
+    if not personajes:
+        print("No hay personajes registrados.")
+        return
+
+    for nombre, personaje in personajes.items():
+        print(
+            f"Nombre: {nombre}, Raza: {personaje['raza']}, Facción: {personaje['faccion']}, Ubicación: {personaje['ubicacion']}, Equipamiento: {personaje['equipamiento']}, Relaciones: {personaje['relaciones']}")
+
 
 
 
