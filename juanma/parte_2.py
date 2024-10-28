@@ -30,6 +30,7 @@ def crear_equipamiento():
         "Potencia": potencia,
     }
 
+#avavavvaa
     equipos[nombre] = equipo
     print(f"Se ha añadido '{equipo['Nombre']}' al arsenal")
     print("Estos son sus datos: ")
