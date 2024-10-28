@@ -48,7 +48,7 @@ def menu_juego():
                 relaciones_personajes(personajes)
                 print("\n")
             case 5:
-                mover_personaje()
+                ubicacion_personaje(personajes)
                 print("\n")
             case 6:
                 simular_batalla()
@@ -222,6 +222,21 @@ def relaciones_personajes(personajes):
     # Devolver información de la relación y el nivel de confianza
     return pj1, pj2, relacion_personajes, nivel_confianza
 
+def ubicacion_personaje(personajes):
+
+
+    while True:
+        nombre = input("Introduce el nombre del primer personaje: ").strip()
+
+
+        if nombre in personajes:
+            break  # Salir del bucle si ambos personajes están registrados
+        else:
+            print("El personaje no esta registrado no están registrados. Por favor, vuelve a intentarlo.")
+
+    nueva_ubicacion = input("Introduce la nueva ubicación: ").strip()
+    personajes[nombre]["ubicacion"] = nueva_ubicacion
+    print(f"{nombre} ha sido movido a {nueva_ubicacion}.")
 
 
 
