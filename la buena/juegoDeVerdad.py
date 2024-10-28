@@ -111,7 +111,7 @@ def registrar_personaje(personajes):
 
 
 # Función para añadir un equipamiento
-def crear_equipamiento():
+def crear_equipamiento(equipos):
     print("---------- CREAR EQUIPAMIENTO -------------")
     nombre = input("Introduzca el nombre del objeto: ")
 
@@ -148,7 +148,7 @@ def crear_equipamiento():
 
 
 # Función para equipar el objeto
-def equipar_objeto():
+def equipar_objeto(personajes,equipos):
     print("---------- EQUIPAMIENTO -------------")
     nombre_personaje = input("Introduzca el nombre del personaje que quieres equipar: ")
 
@@ -171,6 +171,56 @@ def equipar_objeto():
     else:
         print(f"El personaje '{nombre_personaje}' no existe")
 
+
+def relaciones_personajes(personajes):
+
+    while True:
+        pj1 = input("Introduce el nombre del primer personaje: ").strip()
+        pj2 = input("Introduce el nombre del segundo personaje: ").strip()
+
+        if pj1 in personajes and pj2 in personajes:
+            break  # Salir del bucle si ambos personajes están registrados
+        else:
+            print("Uno o ambos personajes no están registrados. Por favor, vuelve a intentarlo.")
+
+
+    tipo_relacion = ["amigos", "enemigos", "neutrales"]
+    relacion_personajes = input(
+        "¿Qué tipo de relación tienen los personajes? (amigos, enemigos, neutrales): ").lower().strip()
+
+    if relacion_personajes in tipo_relacion:
+        # Almacenar la relación
+        personajes[pj1]["relaciones"].append({
+            "personaje_relacionado": pj2,
+            "tipo_relacion": relacion_personajes,
+        })
+
+        personajes[pj2]["relaciones"].append({
+            "personaje_relacionado": pj1,
+            "tipo_relacion": relacion_personajes,
+        })
+
+        print(f"Relación establecida: {pj1} y {pj2} son {relacion_personajes}.")
+
+        while True:
+            try:
+                nivel_confianza = int(input(f"¿Qué nivel de confianza tiene {pj1} con {pj2}? (Elige del 1 al 10): "))
+                if 1 <= nivel_confianza <= 10:
+                    # Almacenar el nivel de confianza en las relaciones
+                    personajes[pj1]["relaciones"][-1]["nivel_confianza"] = nivel_confianza
+                    personajes[pj2]["relaciones"][-1]["nivel_confianza"] = nivel_confianza
+                    print(f"El nivel de confianza es de {nivel_confianza}.")
+                    break
+                else:
+                    print("Por favor, ingresa un número entre 1 y 10.")
+            except ValueError:
+                print("Entrada inválida. Debes ingresar un número.")
+    else:
+        print("Tipo de relación no válido. Elige entre: amigos, enemigos, neutrales.")
+        return pj1, pj2, None, None
+
+    # Devolver información de la relación y el nivel de confianza
+    return pj1, pj2, relacion_personajes, nivel_confianza
 
 
 
