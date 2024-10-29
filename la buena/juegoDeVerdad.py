@@ -1,4 +1,32 @@
 
+
+def  añadir_equipamiento():
+    return print("")
+
+def  equipar_arma():
+    return print("")
+
+
+def  relaciones_personajes():
+    return print("")
+
+def mover_personaje():
+    return print("")
+
+def simular_batalla():
+    return print("")
+
+def personajes_faccion():
+    return print("")
+
+def buscar_personajes():
+    return print("")
+
+def mostrar_personajes():
+    return print("")
+
+
+
 def menu_juego():
     personajes = {}
     equipos = {}
@@ -11,7 +39,7 @@ def menu_juego():
                 registrar_personaje(personajes)
                 print("\n")
             case 2:
-                crear_equipamiento(equipos, personajes)
+                crear_equipamiento(equipos)
                 print("\n")
             case 3:
                 equipar_objeto(personajes,equipos)
@@ -26,13 +54,13 @@ def menu_juego():
                 simular_batalla()
                 print("\n")
             case 7:
-                listar_personajes_faccion(personajes)
+                personajes_faccion()
                 print("\n")
             case 8:
                 buscar_personajes()
                 print("\n")
             case 9:
-                mostrar_personajes(personajes)
+                mostrar_personajes()
                 print("\n")
             case 10:
                 print("Has salido del programa")
@@ -83,94 +111,65 @@ def registrar_personaje(personajes):
 
 
 # Función para añadir un equipamiento
-def crear_equipamiento(equipos, personajes):
+def crear_equipamiento(equipos):
     print("---------- CREAR EQUIPAMIENTO -------------")
-    opcion = input(f"¿Quieres crear equipamientos? (si/no)")
+    nombre = input("Introduzca el nombre del objeto: ")
 
-    if opcion == "si":
+    if nombre in equipos:
+        print(f"Ya existe un equipo con el nombre '{nombre}'")
+        return
 
-        nombre = input("Introduzca el nombre del objeto: ")
+    tipo = input("Introduce el tipo de equipo (Arma, Armadura, Objeto especial): ")
 
-        if nombre in equipos:
-            print(f"Ya existe un equipo con el nombre '{nombre}'")
-            return
-
-        tipo = input("Introduce el tipo de equipo (Arma, Armadura, Objeto especial): ")
-
-        while True:
-            try:
-                potencia = int(input("Introduce la potencia del equipo (debe ser un número positivo): "))
-                if potencia > 0:
-                    break
-                else:
-                    print("La potencia tiene que ser positiva")
-            except ValueError:
-                print("ERROR, el número no es válido")
-
-        equipo = {
-            "Nombre": nombre,
-            "Tipo": tipo,
-            "Potencia": potencia,
-        }
-
-        equipos[nombre] = equipo
-        print(f"Se ha añadido '{equipo['Nombre']}' al arsenal")
-        print("Estos son sus datos: ")
-
-        for key, value in equipo.items():
-            print(f"{key}: {value}")
-
-        nombre_personaje = input("Introduzca el nombre del personaje que quieres equipar: ")
-
-        if nombre_personaje in personajes:
-            personaje = personajes[nombre_personaje]
-            print(f"Se ha encontrado al personaje llamado {nombre_personaje}")
-
-            print("Este es el equipamiento que se puede añadir: ")
-            for nombre, equipo in equipos.items():
-                print(f"Nombre: {equipo['Nombre']}, Tipo: {equipo['Tipo']}, Potencia: {equipo['Potencia']}")
-
-            equipo_personaje = input("Escribe el nombre del equipo que quieres darle al personaje: ")
-
-            if equipo_personaje in equipos:
-                personaje['equipamiento'].append(equipos[equipo_personaje])
-                print(f"Se ha añadido '{equipo_personaje}' a {nombre_personaje}.")
-                print(f"Equipamiento actual de {nombre_personaje}: {personaje['equipamiento']}")
+    while True:
+        try:
+            potencia = int(input("Introduce la potencia del equipo (debe ser un número positivo): "))
+            if potencia > 0:
+                break
             else:
-                print(f"El equipamiento '{equipo_personaje}' no existe")
-        else:
-            print(f"El personaje '{nombre_personaje}' no existe")
+                print("La potencia tiene que ser positiva")
+        except ValueError:
+            print("ERROR, el número no es válido")
 
-    if opcion == "no":
+    equipo = {
+        "Nombre": nombre,
+        "Tipo": tipo,
+        "Potencia": potencia,
+    }
 
-        print(equipos)
+    equipos[nombre] = equipo
+    print(f"Se ha añadido '{equipo['Nombre']}' al arsenal")
+    print("Estos son sus datos: ")
 
-        nombre_personaje = input("Introduzca el nombre del personaje que quieres equiparle un equipo: ")
+    for key, value in equipo.items():
+        print(f"{key}: {value}")
 
-        if nombre_personaje in personajes:
-            personaje = personajes[nombre_personaje]
-            print(f"Se ha encontrado al personaje llamado {nombre_personaje}")
 
-            print("Este es el equipamiento que se puede añadir: ")
-            for nombre, equipo in equipos.items():
-                print(f"Nombre: {equipo['Nombre']}, Tipo: {equipo['Tipo']}, Potencia: {equipo['Potencia']}")
-
-            equipo_personaje = input("Escribe el nombre del equipo que quieres darle al personaje: ")
-
-            if equipo_personaje in equipos:
-                personaje['equipamiento'].append(equipos[equipo_personaje])
-                print(f"Se ha añadido '{equipo_personaje}' a {nombre_personaje}.")
-                print(f"Equipamiento actual de {nombre_personaje}: {personaje['equipamiento']}")
-            else:
-                print(f"El equipamiento '{equipo_personaje}' no existe")
-        else:
-            print(f"El personaje '{nombre_personaje}' no existe")
 
 
 # Función para equipar el objeto
 def equipar_objeto(personajes,equipos):
     print("---------- EQUIPAMIENTO -------------")
+    nombre_personaje = input("Introduzca el nombre del personaje que quieres equipar: ")
 
+    if nombre_personaje in personajes:
+        personaje = personajes[nombre_personaje]
+        print(f"Se ha encontrado al personaje llamado {nombre_personaje}")
+
+        print("Este es el equipamiento que se puede añadir: ")
+        for nombre, equipo in equipos.items():
+            print(f"Nombre: {equipo['Nombre']}, Tipo: {equipo['Tipo']}, Potencia: {equipo['Potencia']}")
+
+        equipo_personaje = input("Escribe el nombre del equipo que quieres darle al personaje: ")
+
+        if equipo_personaje in equipos:
+            personaje['equipamiento'].append(equipos[equipo_personaje])
+            print(f"Se ha añadido '{equipo_personaje}' a {nombre_personaje}.")
+            print(f"Equipamiento actual de {nombre_personaje}: {personaje['equipamiento']}")
+        else:
+            print(f"El equipamiento '{equipo_personaje}' no existe")
+    else:
+        print(f"El personaje '{nombre_personaje}' no existe")
 
 
 def relaciones_personajes(personajes):
@@ -192,13 +191,13 @@ def relaciones_personajes(personajes):
     if relacion_personajes in tipo_relacion:
         # Almacenar la relación
         personajes[pj1]["relaciones"].append({
-            "Personaje relacionado": pj2,
-            "Tipo relacion": relacion_personajes,
+            "personaje_relacionado": pj2,
+            "tipo_relacion": relacion_personajes,
         })
 
         personajes[pj2]["relaciones"].append({
-            "Personaje relacionado": pj1,
-            "Tipo relacion": relacion_personajes,
+            "personaje_relacionado": pj1,
+            "tipo_relacion": relacion_personajes,
         })
 
         print(f"Relación establecida: {pj1} y {pj2} son {relacion_personajes}.")
@@ -238,37 +237,6 @@ def ubicacion_personaje(personajes):
     nueva_ubicacion = input("Introduce la nueva ubicación: ").strip()
     personajes[nombre]["ubicacion"] = nueva_ubicacion
     print(f"{nombre} ha sido movido a {nueva_ubicacion}.")
-
-
-def listar_personajes_faccion(personajes):
-    faccion = input("Introduzca el nombre de una facción: ")
-    personajes_faccion = []
-
-    for nombre, informacion in personajes.items():
-        if informacion.get("faccion") == faccion:
-            personajes_faccion.append(nombre)
-
-
-    if personajes_faccion:
-        print(f"Personajes en la facción '{faccion}':")
-        print(personajes_faccion)
-    else:
-        print(f"No se encontraron personajes en la facción '{faccion}'.")
-
-
-
-
-
-
-def mostrar_personajes(personajes):
-    if not personajes:
-        print("No hay personajes registrados.")
-        return
-
-    for nombre, personaje in personajes.items():
-        print(
-            f"Nombre: {nombre}, Raza: {personaje['raza']}, Facción: {personaje['faccion']}, Ubicación: {personaje['ubicacion']}, Equipamiento: {personaje['equipamiento']}, Relaciones: {personaje['relaciones']}")
-
 
 
 
