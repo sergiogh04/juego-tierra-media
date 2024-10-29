@@ -100,6 +100,7 @@ def registrar_personaje(personajes):
         "faccion": faccion,
         "ubicacion": ubicacion,
         "equipamiento": [],
+        "arma_equipada": None,
         "relaciones": [],
     }
 
