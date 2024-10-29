@@ -109,7 +109,7 @@ def menu_juego():
                 print("\n")
             case 9:
                 mostrar_personajes()
-                print("\n")
+                print("\nola")
             case 10:
                 print("Has salido del programa")
                 break
